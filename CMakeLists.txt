@@ -19,4 +19,6 @@ add_executable(inmemdb_cli src/main.cpp)
 target_link_libraries(inmemdb_cli PRIVATE inmemdb)
 
 enable_testing()
-# Placeholder for future tests
+add_executable(inmemdb_tests tests/test_inmemdb.cpp)
+target_link_libraries(inmemdb_tests PRIVATE inmemdb)
+add_test(NAME inmemdb_tests COMMAND inmemdb_tests)

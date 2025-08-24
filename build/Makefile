@@ -152,6 +152,19 @@ inmemdb_cli/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/inmemdb_cli.dir/build.make CMakeFiles/inmemdb_cli.dir/build
 .PHONY : inmemdb_cli/fast
 
+#=============================================================================
+# Target rules for targets named inmemdb_tests
+
+# Build rule for target.
+inmemdb_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 inmemdb_tests
+.PHONY : inmemdb_tests
+
+# fast build rule for target.
+inmemdb_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inmemdb_tests.dir/build.make CMakeFiles/inmemdb_tests.dir/build
+.PHONY : inmemdb_tests/fast
+
 src/executor.o: src/executor.cpp.o
 .PHONY : src/executor.o
 
@@ -272,6 +285,30 @@ src/storage.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/inmemdb.dir/build.make CMakeFiles/inmemdb.dir/src/storage.cpp.s
 .PHONY : src/storage.cpp.s
 
+tests/test_inmemdb.o: tests/test_inmemdb.cpp.o
+.PHONY : tests/test_inmemdb.o
+
+# target to build an object file
+tests/test_inmemdb.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inmemdb_tests.dir/build.make CMakeFiles/inmemdb_tests.dir/tests/test_inmemdb.cpp.o
+.PHONY : tests/test_inmemdb.cpp.o
+
+tests/test_inmemdb.i: tests/test_inmemdb.cpp.i
+.PHONY : tests/test_inmemdb.i
+
+# target to preprocess a source file
+tests/test_inmemdb.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inmemdb_tests.dir/build.make CMakeFiles/inmemdb_tests.dir/tests/test_inmemdb.cpp.i
+.PHONY : tests/test_inmemdb.cpp.i
+
+tests/test_inmemdb.s: tests/test_inmemdb.cpp.s
+.PHONY : tests/test_inmemdb.s
+
+# target to generate assembly for a file
+tests/test_inmemdb.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/inmemdb_tests.dir/build.make CMakeFiles/inmemdb_tests.dir/tests/test_inmemdb.cpp.s
+.PHONY : tests/test_inmemdb.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -283,6 +320,7 @@ help:
 	@echo "... test"
 	@echo "... inmemdb"
 	@echo "... inmemdb_cli"
+	@echo "... inmemdb_tests"
 	@echo "... src/executor.o"
 	@echo "... src/executor.i"
 	@echo "... src/executor.s"
@@ -298,6 +336,9 @@ help:
 	@echo "... src/storage.o"
 	@echo "... src/storage.i"
 	@echo "... src/storage.s"
+	@echo "... tests/test_inmemdb.o"
+	@echo "... tests/test_inmemdb.i"
+	@echo "... tests/test_inmemdb.s"
 .PHONY : help
 
 

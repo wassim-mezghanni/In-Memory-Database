@@ -1,0 +1,19 @@
+Start testing: Aug 24 11:56 CET
+----------------------------------------------------------
+1/1 Testing: inmemdb_tests
+1/1 Test: inmemdb_tests
+Command: "/Users/wassim/In-Memory-Database/build/inmemdb_tests"
+Directory: /Users/wassim/In-Memory-Database/build
+"inmemdb_tests" start time: Aug 24 11:56 CET
+Output:
+----------------------------------------------------------
+All tests passed
+<end of output>
+Test time =   0.15 sec
+----------------------------------------------------------
+Test Passed.
+"inmemdb_tests" end time: Aug 24 11:56 CET
+"inmemdb_tests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Aug 24 11:56 CET
