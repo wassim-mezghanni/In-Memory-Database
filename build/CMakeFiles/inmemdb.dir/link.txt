@@ -1,0 +1,2 @@
+/usr/bin/ar qc libinmemdb.a CMakeFiles/inmemdb.dir/src/lexer.cpp.o CMakeFiles/inmemdb.dir/src/parser.cpp.o CMakeFiles/inmemdb.dir/src/storage.cpp.o CMakeFiles/inmemdb.dir/src/executor.cpp.o
+/usr/bin/ranlib libinmemdb.a

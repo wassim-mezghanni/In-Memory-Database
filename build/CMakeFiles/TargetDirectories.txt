@@ -1,0 +1,5 @@
+/Users/wassim/In-Memory-Database/build/CMakeFiles/inmemdb.dir
+/Users/wassim/In-Memory-Database/build/CMakeFiles/inmemdb_cli.dir
+/Users/wassim/In-Memory-Database/build/CMakeFiles/test.dir
+/Users/wassim/In-Memory-Database/build/CMakeFiles/edit_cache.dir
+/Users/wassim/In-Memory-Database/build/CMakeFiles/rebuild_cache.dir
