@@ -96,6 +96,17 @@ InsertStmt Parser::parse_insert() {
     return InsertStmt{table, std::move(values)};
 }
 
+std::string Parser::parse_column_name() {
+    if (current().type != TokenType::Identifier) throw std::runtime_error("Expected identifier");
+    std::string name = current().text; advance();
+    if (accept(TokenType::Dot)) {
+        if (current().type != TokenType::Identifier) throw std::runtime_error("Expected identifier after '.'");
+        name += ".";
+        name += current().text; advance();
+    }
+    return name;
+}
+
 SelectStmt Parser::parse_select() {
     expect(TokenType::KeywordSelect, "Expected SELECT");
     SelectStmt stmt;
@@ -107,9 +118,7 @@ SelectStmt Parser::parse_select() {
         while (true) {
             if (!first) expect(TokenType::Comma, "Expected ',' between column names");
             first = false;
-            if (current().type != TokenType::Identifier) throw std::runtime_error("Expected column name in select list");
-            stmt.columns.push_back(current().text);
-            advance();
+            stmt.columns.push_back(parse_column_name());
             if (current().type != TokenType::Comma) break;
         }
     }
@@ -119,10 +128,22 @@ SelectStmt Parser::parse_select() {
     if (current().type != TokenType::Identifier) throw std::runtime_error("Expected table name after FROM");
     stmt.table = current().text; advance();
     
+    // Optional INNER JOIN or JOIN
+    bool sawInner = accept(TokenType::KeywordInner);
+    if (sawInner || current().type == TokenType::KeywordJoin) {
+        expect(TokenType::KeywordJoin, "Expected JOIN");
+        if (current().type != TokenType::Identifier) throw std::runtime_error("Expected right table name after JOIN");
+        std::string right = current().text; advance();
+        expect(TokenType::KeywordOn, "Expected ON");
+        std::string left_col = parse_column_name();
+        expect(TokenType::Equal, "Expected '=' in JOIN condition");
+        std::string right_col = parse_column_name();
+        stmt.join = JoinClause{right, left_col, right_col};
+    }
+
     // check for optional WHERE clause
     if (accept(TokenType::KeywordWhere)) {
-        if (current().type != TokenType::Identifier) throw std::runtime_error("Expected column name in WHERE");
-        std::string col = current().text; advance();
+        std::string col = parse_column_name();
         std::string op;
         switch(current().type) {
             case TokenType::Equal: op = "="; break;
@@ -142,4 +163,4 @@ SelectStmt Parser::parse_select() {
     return stmt;
 }
 
-} 
+}

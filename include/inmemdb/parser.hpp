@@ -3,7 +3,7 @@
 #include <vector>
 #include <variant>
 #include <optional>
-#include <optional>#include "inmemdb/lexer.hpp"
+#include "inmemdb/lexer.hpp"
 
 namespace inmemdb {
 
@@ -20,19 +20,26 @@ struct CreateTableStmt {
 
 struct InsertStmt { 
     std::string table; 
-    std::vector<std::string> values; }; 
+    std::vector<std::string> values; };
 
 struct WhereCond { 
     std::string column; 
-    std::string op;  // op only = != < > <= >=
+    std::string op;  // = != < > <= >=
     std::string value; 
 }; 
 
+struct JoinClause {
+    std::string right_table;
+    std::string left_col;  // column name on left table
+    std::string right_col; // column name on right table
+};
+
 struct SelectStmt { 
-    std::vector<std::string> columns; 
-    std::string table; 
+    std::vector<std::string> columns; // may include qualified names like t.col
+    std::string table; // left table
+    std::optional<JoinClause> join; // optional INNER JOIN
     std::optional<WhereCond> where; 
-    bool select_all = false; // flag for SELECT *
+    bool select_all = false; 
 };
 
 using Statement = std::variant<CreateTableStmt, InsertStmt, SelectStmt>;
@@ -47,6 +54,9 @@ private:
     InsertStmt parse_insert();
     SelectStmt parse_select();
 
+    // helpers
+    std::string parse_column_name(); // identifier or qualified identifier
+
     bool accept(TokenType t);
     void expect(TokenType t, const char* msg);
     Token const& current();
@@ -57,4 +67,4 @@ private:
     bool started_ = false;
 };
 
-}
+} // namespace inmemdb

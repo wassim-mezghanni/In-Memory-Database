@@ -31,6 +31,10 @@ enum class TokenType {
     KeywordWhere,
     KeywordInt,
     KeywordText,
+    KeywordJoin,
+    KeywordInner,
+    KeywordOn,
+    Dot,
 };
 
 struct Token {
@@ -66,8 +70,12 @@ inline const char* to_string(TokenType t) {
         case TokenType::KeywordWhere: return "WHERE";
         case TokenType::KeywordInt: return "INT";
         case TokenType::KeywordText: return "TEXT";
+        case TokenType::KeywordJoin: return "JOIN";
+        case TokenType::KeywordInner: return "INNER";
+        case TokenType::KeywordOn: return "ON";
+        case TokenType::Dot: return ".";
     }
     return "?";
 }
 
-} 
+}

@@ -25,7 +25,8 @@ Token Lexer::make_identifier_or_keyword(std::size_t start) {
         {"INSERT", TokenType::KeywordInsert}, {"INTO", TokenType::KeywordInto},
         {"VALUES", TokenType::KeywordValues}, {"SELECT", TokenType::KeywordSelect},
         {"FROM", TokenType::KeywordFrom}, {"WHERE", TokenType::KeywordWhere},
-        {"INT", TokenType::KeywordInt}, {"TEXT", TokenType::KeywordText}
+        {"INT", TokenType::KeywordInt}, {"TEXT", TokenType::KeywordText},
+        {"JOIN", TokenType::KeywordJoin}, {"INNER", TokenType::KeywordInner}, {"ON", TokenType::KeywordOn}
     };
     auto it = keywords.find(upper);
     if (it != keywords.end()) return {it->second, upper, start};
@@ -77,6 +78,7 @@ Token Lexer::next() {
         case ';': return {TokenType::Semicolon, ";", start};
         case '*': return {TokenType::Star, "*", start};
         case '=': return {TokenType::Equal, "=", start};
+        case '.': return {TokenType::Dot, ".", start};
         case '!':
             if (pos_ < input_.size() && input_[pos_] == '=') { ++pos_; return {TokenType::NotEqual, "!=", start}; }
             break;
@@ -103,4 +105,4 @@ Token Lexer::peek() {
     return lookahead_;
 }
 
-} 
+}
